@@ -16,22 +16,31 @@ const NotificationComponent = () => {
       }
     };
 
-    // Check if notification permission is granted
+    // Request notification permission if not already granted
     if (Notification.permission === "default") {
       Notification.requestPermission().then((permission) => {
         if (permission === "granted") {
           console.log("Notification permission granted!");
+          // Start showing notifications every 10 seconds
+          const notificationInterval = setInterval(() => {
+            showNotification();
+          }, 10000);
+
+          // Cleanup interval when component unmounts
+          return () => clearInterval(notificationInterval);
+        } else {
+          console.log("Notification permission denied.");
         }
       });
+    } else if (Notification.permission === "granted") {
+      // If permission is already granted, show notifications every 10 seconds
+      const notificationInterval = setInterval(() => {
+        showNotification();
+      }, 10000);
+
+      // Cleanup interval when component unmounts
+      return () => clearInterval(notificationInterval);
     }
-
-    // Set an interval to show the notification every 10 seconds
-    const notificationInterval = setInterval(() => {
-      showNotification();
-    }, 10000); // 10000ms = 10 seconds
-
-    // Cleanup the interval on component unmount
-    return () => clearInterval(notificationInterval);
   }, []);
 
   return null; // This component doesn't render any UI
@@ -82,7 +91,8 @@ function App() {
         />
       )}
 
-      {showNotifications && <NotificationComponent />} {/* Only show notifications if user confirms */}
+      {/* Only show notifications if user confirms */}
+      {showNotifications && <NotificationComponent />}
     </div>
   );
 }

@@ -1,0 +1,10 @@
+.popup-container {
+    height: 480px;
+    background-color: white;
+    display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  }
+  .popup-container::-webkit-scrollbar {
+    display: none;
+}

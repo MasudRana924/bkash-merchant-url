@@ -1,0 +1,7 @@
+.main-navbar {
+    position: sticky;
+    top: 0;
+    /* z-index:999; */
+    background-color: #ff006e;
+    /* border:1px solid #ff006e; */
+}

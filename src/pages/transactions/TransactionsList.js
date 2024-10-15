@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import addNotification from "react-push-notification";
+// import addNotification from "react-push-notification";
 import Lottie from "lottie-react";
 import preloaderAnimation from "../../assets/json/Animation - 1715745618808.json";
 import TransactionCard from "./../../components/transactions/TransactionCard ";
@@ -45,11 +45,11 @@ const TransactionList = () => {
         newTransactions.forEach((transaction) => {
           const notificationMessage = `You have received a payment of ${transaction.amount} taka from ${transaction.debit_msisdn}`;
           if (isNotificationEnabled) {
-            addNotification({
-              title: "Payment",
-              message: notificationMessage,
-              native: true,
-            });
+            // addNotification({
+            //   title: "Payment",
+            //   message: notificationMessage,
+            //   native: true,
+            // });
           }
           if (isSpeakEnabled) {
             speakNotification(notificationMessage);
